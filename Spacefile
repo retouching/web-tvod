@@ -1,0 +1,8 @@
+# Spacefile Docs: https://go.deta.dev/docs/spacefile/v0
+v: 0
+micros:
+  - name: tvod-web
+    src: ./web
+    engine: python3.9
+    run: uwsgi --http app:app
+    dev: flask run --port $PORT --debug
