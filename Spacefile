@@ -2,7 +2,14 @@
 v: 0
 micros:
   - name: tvod-web
-    src: ./web
     engine: python3.9
-    run: uwsgi --http app:app
+    src: .
+    run: flask run --port $PORT
     dev: flask run --port $PORT --debug
+    presets:
+      env:
+        - name: FLASK_APP
+          description: Flask app file
+          default: "web/app.py"
+        - name: PROXY
+          description: Proxy to use for doing requests to twitch

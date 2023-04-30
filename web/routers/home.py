@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template
 
-router = Blueprint('router', __name__, url_prefix="/")
+router = Blueprint('home', __name__, url_prefix="/")
 
 
 @router.route('/', methods=['GET'])

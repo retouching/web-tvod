@@ -1,2 +1,3 @@
 git+https://github.com/retouching/tvod.git
 Flask
+httpx

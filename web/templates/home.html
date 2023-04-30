@@ -1,10 +1,72 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <title>WebTVOD - Watch Twitch VOD</title>
+    <title>Web TVOD - Watch Twitch VOD</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.4/css/bulma.min.css" integrity="sha512-HqxHUkJM0SYcbvxUw5P60SzdOTy/QVwA1JJrvaXJv4q7lmbDZCmZaqz01UPOaQveoxfYRv1tHozWGPMcuTBuvQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@vime/core@^5/themes/default.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link rel="stylesheet" href="/static/tvod.css">
 </head>
 <body>
+    <section class="hero is-fullheight vod">
+      <div class="hero-body">
+        <div class="container is-centered has-text-centered">
+            <h1 class="title">
+              Web <span class="accent">T</span>VOD
+            </h1>
+            <h2 class="subtitle">
+              🔓 Unlock twitch vod's
+            </h2>
 
+            <form id="formVOD" class="field has-addons">
+                <div class="control is-expanded">
+                    <input class="input" type="text" placeholder="Paste VOD URL here">
+                </div>
+                <div class="control">
+                    <button class="button is-primary">
+                        Fetch streams
+                    </button>
+                </div>
+            </form>
+
+            <form id="formPlayer" class="field has-addons">
+                <div class="control is-expanded">
+                    <div class="select">
+                        <select>
+                            <option>Select dropdown</option>
+                            <option>With options</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="control">
+                    <button class="button is-primary">
+                        Play
+                    </button>
+                </div>
+            </form>
+
+            <div id="player"></div>
+        </div>
+      </div>
+    </section>
+
+    <script src="https://unpkg.com/twemoji@latest/dist/twemoji.min.js" crossorigin="anonymous"></script>
+    <script defer type="module" src="https://cdn.jsdelivr.net/npm/@vime/core@^5/dist/vime/vime.esm.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/3.6.2/fetch.min.js"></script>
+    <script src="/static/utils.js"></script>
+    <script src="/static/app.js"></script>
+
+    <script>
+        const fetchStream = document.querySelector('#formVOD');
+        if (fetchStream) fetchStream.onsubmit = fetchVOD;
+
+        const playStream = document.querySelector('#formPlayer');
+        if (playStream) playStream.onsubmit = submitStream;
+    </script>
 </body>
 </html>
