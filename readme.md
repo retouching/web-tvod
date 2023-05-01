@@ -45,7 +45,8 @@ $ . .venv/bin/activate
 $ flask run
 ```
 
-*To pass requests in a proxy, set the PROXY environment variable*
+To pass requests in a proxy, set the PROXY environment variable
+You can also proxy segments stream by set CFW_PROXY_URL environment variable with your [cfw-proxy](https://github.com/retouching/cfw-proxy) URL
 
 <h2>Demo</h2>
 

@@ -1,5 +1,7 @@
+import os
+
 import httpx
-from flask import Blueprint, Response
+from flask import Blueprint, Response, redirect
 from tvod.helpers.exceptions import TwitchException
 
 from app.helpers import twitch
@@ -72,6 +74,9 @@ def fragment(vod_id, quality, fragement):
 
     if req.status_code != httpx.codes.OK:
         return {'error': 'Stream fragement not found'}, 400
+
+    if os.environ.get('CFW_PROXY_URL'):
+        return redirect(f'{os.environ.get("CFW_PROXY_URL")}?url={ts_url}&content_type=application/octet-stream')
 
     def generate_response():
         with httpx.stream('GET', ts_url) as content_stream:
