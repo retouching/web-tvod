@@ -22,7 +22,7 @@ function success(message) {
 }
 
 function parseURL(url) {
-    const parsed = /https?:\/\/(www\.)?twitch\.tv\/([^\/]+\/)?(videos|clip)\/([^? ]+)/g.exec(url);
+    const parsed = /https?:\/\/(www\.|m\.)?twitch\.tv\/([^\/]+\/)?(videos|clip)\/([^? ]+)/g.exec(url);
 
     if (!parsed) return null;
     if (parsed[3] !== 'videos') return null;
@@ -52,15 +52,4 @@ async function loadingFetch(formSelector, ...args) {
     toggleLoading(formSelector, false);
 
     return req;
-}
-
-function generatePlayer(url) {
-    return `
-    <vm-player playsinline>
-        <vm-hls version="latest">
-            <source type="application/x-mpegURL" data-src="${url}" />
-        </vm-hls>
-        <vm-default-ui></vm-default-ui>
-    </vm-player>
-    `;
 }

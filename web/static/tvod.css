@@ -39,7 +39,7 @@ img.emoji {
 .vod .field {
     margin-right: auto;
     margin-left: auto;
-    width: 450px;
+    width: 350px;
     margin-bottom: 1.5rem;
 }
 
@@ -104,6 +104,9 @@ img.emoji {
     width: 100%;
 }
 
-vm-player {
-    text-align: left !important;
+#player {
+    display: none;
+    margin: auto;
+    width: 100%;
+    border-radius: 4px;
 }

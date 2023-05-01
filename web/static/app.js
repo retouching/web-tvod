@@ -1,22 +1,19 @@
 async function fetchVOD(evt) {
     evt.preventDefault();
 
-    const player = document.querySelector('#player');
-    if (!player) return;
-
     const streamSelectForm = document.querySelector('#formPlayer');
-    if (!streamSelectForm) return;
-
-    const form = document.querySelector('#formVOD');
-    if (!form) return;
-
-    const input = form.querySelector('input');
-    if (!input) return;
+    const vodForm = document.querySelector('#formVOD');
+    const player = document.querySelector('#player');
+    const input = vodForm.querySelector('input');
+    const select = streamSelectForm.querySelector('select');
 
     streamSelectForm.style.display = 'none';
+    player.style.display = 'none';
 
-    const playerInner = player.querySelector('vm-player');
-    if (playerInner) playerInner.remove();
+    if (window.hls) {
+        window.hls.destroy();
+        window.hls = null;
+    }
 
     const vodID = parseURL(input.value);
 
@@ -27,9 +24,6 @@ async function fetchVOD(evt) {
     if (!req || req.status !== 200) return error('Invalid VOD URL');
 
     const { data } = await req.json();
-
-    const select = streamSelectForm.querySelector('select');
-    if (!select) return;
 
     select.innerHTML = '';
 
@@ -44,22 +38,30 @@ async function fetchVOD(evt) {
     }
 
     streamSelectForm.style.display = 'flex';
-
-    success(`You can select quality for:\n${data.title} by ${data.streamer}`);
 }
 
 async function submitStream(evt) {
     evt.preventDefault();
 
     const form = document.querySelector('#formPlayer');
-    if (!form) return;
-
     const select = form.querySelector('select');
-    if (!select || !select.value) return;
 
-    let player = document.querySelector('vm-player');
-    if (player) player.remove();
+    if (window.hls) {
+        window.hls.destroy();
+        window.hls = null;
+    }
 
-    player = document.querySelector('#player');
-    player.innerHTML = generatePlayer(select.value);
+    const player = document.querySelector('#player');
+
+    if (Hls.isSupported()) {
+        window.hls = new Hls();
+        hls.loadSource(select.value);
+        hls.attachMedia(player);
+    } else if (player.canPlayType('application/vnd.apple.mpegurl')) {
+        player.src = select.value;
+    } else {
+        error('HLS stream not supported on you device');
+    }
+
+    player.style.display = 'block';
 }

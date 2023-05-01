@@ -75,7 +75,7 @@ def fragment(vod_id, quality, fragement):
 
     def generate_response():
         with httpx.stream('GET', ts_url) as content_stream:
-            for chunk in content_stream.iter_bytes(chunk_size=2048):
+            for chunk in content_stream.iter_bytes(chunk_size=8192):
                 yield chunk
 
     return Response(generate_response(), mimetype='video/MP2T')
