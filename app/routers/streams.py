@@ -2,7 +2,7 @@ import httpx
 from flask import Blueprint, Response
 from tvod.helpers.exceptions import TwitchException
 
-from web.helpers import twitch
+from app.helpers import twitch
 
 router = Blueprint('streams', __name__, url_prefix='/streams')
 

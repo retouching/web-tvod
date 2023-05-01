@@ -2,7 +2,7 @@ from flask import Blueprint
 from tvod.helpers.exceptions import TwitchException
 from tvod.models.stream import Stream
 
-from web.helpers import twitch
+from app.helpers import twitch
 
 router = Blueprint('vod', __name__, url_prefix='/api')
 
