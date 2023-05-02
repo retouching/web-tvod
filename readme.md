@@ -6,8 +6,6 @@
 
 Simple example app of [TVOD](https://github.com/retouching/tvod)
 
-<br>
-
 <h2>Requirements</h2>
 
 - **Python** (up to 3.9)
@@ -46,11 +44,16 @@ $ flask run
 ```
 
 To pass requests in a proxy, set the PROXY environment variable
+
 You can also proxy segments stream by set CFW_PROXY_URL environment variable with your [cfw-proxy](https://github.com/retouching/cfw-proxy) URL
 
 <h2>Demo</h2>
 
 ![](./.github/assets/example.gif)
+
+<h2>Todolist</h2>
+
+- [ ] Add auth system to limit who can have access the service
 
 <h2>Warning: Some things need to be considered</h2>
 
